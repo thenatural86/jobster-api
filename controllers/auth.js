@@ -43,7 +43,13 @@ const login = async (req, res) => {
   })
 }
 
+const updateUser = async (req, res) => {
+  console.log('USER', req.user)
+  console.log('BODY', req.body)
+}
+
 module.exports = {
   register,
   login,
+  updateUser,
 }
