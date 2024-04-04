@@ -3,6 +3,7 @@ const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, NotFoundError } = require('../errors')
 
 const getAllJobs = async (req, res) => {
+  console.log(req.query)
   const { search, status, jobType, sort } = req.query
 
   // protected route
@@ -18,7 +19,7 @@ const getAllJobs = async (req, res) => {
   }
 
   if (jobType && jobType !== 'all') {
-    queryObject.status = status
+    queryObject.jobType = jobType
   }
 
   // NO AWAIT
@@ -37,6 +38,9 @@ const getAllJobs = async (req, res) => {
 
   if (sort === 'a-z') {
     result = result.sort('position')
+  }
+  if (sort === 'z-a') {
+    result = result.sort('-position')
   }
 
   // setup pagination
